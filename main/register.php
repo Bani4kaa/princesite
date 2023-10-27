@@ -1,8 +1,8 @@
 <?php
-$host = 'nodes1.thundernodes.tech:3306';
-$dbname = 's168_register';
-$username = 'u168_sVqVQkC5p9';
-$db_password = 'l@6OjExWjY+RcqVbOub.JCk!'; // Use a different variable for database password
+$host = 'nuh uh';
+$dbname = 'nuh uh';
+$username = 'nuh uh';
+$db_password = 'nuh uh'; // Use a different variable for database password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $db_password);
