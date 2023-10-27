@@ -1,9 +1,13 @@
-/* Add your CSS styles here */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
@@ -12,12 +16,12 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 400px;
-    margin: 0 auto;
-    margin-top: 50px;
+    text-align: center;
 }
 
 h2 {
-    text-align: center;
+    margin: 0;
+    padding: 10px 0;
 }
 
 form {

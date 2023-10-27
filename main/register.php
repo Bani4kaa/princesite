@@ -39,10 +39,10 @@
 <html>
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="container"> <!-- Added a container div for styling -->
+    <div class="container">
         <h2>Register</h2>
         <form action="register.php" method="post">
             <label for="registration_type">Select Registration Type:</label>
