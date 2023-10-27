@@ -1,35 +1,35 @@
 <?php
-#$host = 'soon';
-#$dbname = 'soon';
-#$username = 'soon';
-#$password = 'soon';
+$host = 'nodes1.thundernodes.tech:3306';
+$dbname = 's168_register';
+$username = 'u168_sVqVQkC5p9';
+$db_password = 'l@6OjExWjY+RcqVbOub.JCk!'; // Use a different variable for database password
 
-#try {
- #   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
- #   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $db_password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
- #   $registration_type = $_POST['registration_type'];
- #   $username = $_POST['username'];
- #   $email = $_POST['email'];
- #   $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $registration_type = $_POST['registration_type'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Use a different variable for hashed password
 
-#    if ($registration_type === 'Client') {
-   #     $stmt = $pdo->prepare("INSERT INTO clients (username, email, password) VALUES (:username, :email, :password)");
- #   } elseif ($registration_type === 'Business') {
-   #     $company_name = $_POST['company_name'];
-   #     $stmt = $pdo->prepare("INSERT INTO businesses (company_name, username, email, password) VALUES (:company_name, :username, :email, :password)");
-   #     $stmt->bindParam(':company_name', $company_name);
-  #  }
+    if ($registration_type === 'Client') {
+        $stmt = $pdo->prepare("INSERT INTO clients (username, email, password) VALUES (:username, :email, :password)");
+    } elseif ($registration_type === 'Business') {
+        $company_name = $_POST['company_name'];
+        $stmt = $pdo->prepare("INSERT INTO businesses (company_name, username, email, password) VALUES (:company_name, :username, :email, :password)");
+        $stmt->bindParam(':company_name', $company_name);
+    }
 
- #   $stmt->bindParam(':username', $username);
- #   $stmt->bindParam(':email', $email);
- #   $stmt->bindParam(':password', $password);
- #   $stmt->execute();
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $hashed_password); // Use the hashed password
+    $stmt->execute();
 
-#    echo "Registration successful. You can now <a href='login.html'>login</a>.";
-#} catch (PDOException $e) {
- #   die("Error: " . $e->getMessage());
-#}
+    echo "Registration successful. You can now <a href='login.html'>login</a>.";
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
 ?>
 
 
