@@ -33,8 +33,10 @@
 ?>
 
 
+<style> 
 
-
+</style>
+    <span>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +45,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
+
         <form action="register.php" method="post">
-            <label for="registration_type">Select Registration Type:</label>
+            <label for="registration_type"></label>
             <select name="registration_type" id="registration_type" required>
                 <option value="Client">Client</option>
                 <option value="Business">Business</option>
@@ -63,6 +65,7 @@
             </div>
 
             <input type="submit" value="Register">
+  <a href="index.php" class="continue-button">Continue without Log In</a>
         </form>
     </div>
 </body>
@@ -81,3 +84,4 @@
     </script>
 </body>
 </html>
+</span>
