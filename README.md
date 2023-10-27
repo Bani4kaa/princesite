@@ -3,4 +3,4 @@ Soft Uni FEST 2023
 
 
 
-website: https://banicata.xyz/
+website: https://banicata.xyz/register.php
