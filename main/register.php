@@ -2,34 +2,54 @@
 $host = 'nuh uh';
 $dbname = 'nuh uh';
 $username = 'nuh uh';
-$db_password = 'nuh uh'; // Use a different variable for database password
+$db_password = 'nuh uh'; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $db_password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$registration_status = ''; 
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registration_type = $_POST['registration_type'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Use a different variable for hashed password
+    $password = $_POST['password'];
+    $company_name = ($_POST['company_name'] ?? ''); 
 
-    if ($registration_type === 'Client') {
-        $stmt = $pdo->prepare("INSERT INTO clients (username, email, password) VALUES (:username, :email, :password)");
-    } elseif ($registration_type === 'Business') {
-        $company_name = $_POST['company_name'];
-        $stmt = $pdo->prepare("INSERT INTO businesses (company_name, username, email, password) VALUES (:company_name, :username, :email, :password)");
-        $stmt->bindParam(':company_name', $company_name);
+    // Check if the email or username already exists
+    $email_check_query = "SELECT * FROM users WHERE email='$email'";
+    $username_check_query = "SELECT * FROM users WHERE username='$username'";
+
+    $email_result = mysqli_query($conn, $email_check_query);
+    $username_result = mysqli_query($conn, $username_check_query);
+
+    if (mysqli_num_rows($email_result) > 0) {
+        $registration_status = "Email is already in use. Please choose a different email.";
+    } elseif (mysqli_num_rows($username_result) > 0) {
+        $registration_status = "Username is already in use. Please choose a different username.";
+    } else {
+        
+        $sql = "INSERT INTO users (registration_type, username, email, password, company_name)
+                VALUES ('$registration_type', '$username', '$email', '$password', '$company_name')";
+
+        if (mysqli_query($conn, $sql)) {
+            $registration_status = "Registration successful!";
+            
+            header('Location: index.php');
+            exit; 
+        } else {
+            $registration_status = "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
-
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $hashed_password); // Use the hashed password
-    $stmt->execute();
-
-    echo "Registration successful. You can now <a href='login.html'>login</a>.";
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
 }
+
+
+mysqli_close($conn);
 ?>
 
 
