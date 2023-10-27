@@ -11,9 +11,9 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$registration_status = ''; 
+$registration_status = '';
 
-
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registration_type = $_POST['registration_type'];
     $username = $_POST['username'];
@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $company_name = ($_POST['company_name'] ?? ''); 
 
-    // Check if the email or username already exists
     $email_check_query = "SELECT * FROM users WHERE email='$email'";
     $username_check_query = "SELECT * FROM users WHERE username='$username'";
 
@@ -33,21 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (mysqli_num_rows($username_result) > 0) {
         $registration_status = "Username is already in use. Please choose a different username.";
     } else {
-        
         $sql = "INSERT INTO users (registration_type, username, email, password, company_name)
                 VALUES ('$registration_type', '$username', '$email', '$password', '$company_name')";
 
         if (mysqli_query($conn, $sql)) {
             $registration_status = "Registration successful!";
-            
-            header('Location: index.php');
+            header('Location: login.php');
             exit; 
         } else {
             $registration_status = "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
     }
 }
-
 
 mysqli_close($conn);
 ?>
@@ -64,8 +60,8 @@ mysqli_close($conn);
     <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
+    
     <div class="container">
-
         <form action="register.php" method="post">
             <label for="registration_type"></label>
             <select name="registration_type" id="registration_type" required>
@@ -85,7 +81,7 @@ mysqli_close($conn);
             </div>
 
             <input type="submit" value="Register">
-  <a href="index.php" class="continue-button">Continue without Log In</a>
+                    <a href="login.php" class="login-button">Log In</a>
         </form>
     </div>
 </body>
