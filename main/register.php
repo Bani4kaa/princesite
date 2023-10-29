@@ -1,8 +1,8 @@
 <?php
-$host = 'nuh uh';
-$dbname = 'nuh uh';
-$username = 'nuh uh';
-$db_password = 'nuh uh'; 
+$db_host = 'nuh uh';
+$db_user = 'nuh uh';
+$db_pass = 'nuh uh';
+$db_name = 'nuh uh';
 
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
@@ -11,7 +11,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$registration_status = '';
+$registration_status = ''; 
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $company_name = ($_POST['company_name'] ?? ''); 
+    $company_name = ($_POST['company_name'] ?? '');
 
     $email_check_query = "SELECT * FROM users WHERE email='$email'";
     $username_check_query = "SELECT * FROM users WHERE username='$username'";
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_query($conn, $sql)) {
             $registration_status = "Registration successful!";
             header('Location: login.php');
-            exit; 
+            exit;
         } else {
             $registration_status = "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

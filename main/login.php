@@ -1,9 +1,11 @@
 <?php
-$host = 'nuh uh';
-$dbname = 'nuh uh';
-$username = 'nuh uh';
-$db_password = 'nuh uh'; 
 
+
+
+$db_host = 'nuh uh';
+$db_user = 'nuh uh';
+$db_pass = 'nuh uh';
+$db_name = 'nuh uh';
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
