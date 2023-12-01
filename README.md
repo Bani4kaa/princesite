@@ -5,4 +5,4 @@ Soft Uni FEST has ended and we sadly qualified last but we will continue the pro
 
 
 
-website: https://banicata.xyz/register.php
+website: no hosting if somebody want's to host it feel free to dm me on discord: wavll
