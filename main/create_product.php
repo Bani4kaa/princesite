@@ -5,7 +5,7 @@ if ($ip_address === 'api.stripe.com' || !filter_var($ip_address, FILTER_VALIDATE
     die("Error: Could not resolve host: api.stripe.com");
 }
 
-require_once 'stripe-php-master/init.php'; // Replace with the actual path to the Stripe library
+require_once 'stripe-php-master/init.php';
 \Stripe\Stripe::setApiKey('sk_test_NUH UH');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
